@@ -1,0 +1,36 @@
+version: '2'
+services:
+ mysql-master:
+   restart: always
+   build: master/
+   image: registry.vcredit.com/o2o/mysql-master
+   volumes:
+   - /home/o2odev/dockerData/o2o-mysql-master/data:/var/lib/mysql
+   - /etc/localtime:/etc/localtime
+   environment:
+    MYSQL_ROOT_PASSWORD: vcredit_o2o
+    --character-set-server: utf8mb4
+   ports:
+   - 3307:3306
+   container_name: o2o-mysql-master
+   mem_limit: 8g
+
+ mysql-slave:
+   restart: always
+   build: slave/
+   image: registry.vcredit.com/o2o/mysql-slave
+   volumes:
+   - /home/o2odev/dockerData/o2o-mysql-slave/data:/var/lib/mysql
+   - /etc/localtime:/etc/localtime
+   environment:
+    MYSQL_ROOT_PASSWORD: vcredit_o2o
+    --character-set-server: utf8mb4
+   ports:
+   - 3308:3306
+   container_name: o2o-mysql-slave
+   mem_limit: 8g
+
+networks:
+  default:
+    external:
+      name: o2o-network
