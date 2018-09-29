@@ -7,9 +7,9 @@ services:
    volumes:
    - /home/o2odev/dockerData/o2o-mysql-master/data:/var/lib/mysql
    - /etc/localtime:/etc/localtime
+   command: [--character-set-server=utf8mb4,--collation-server=utf8mb4_unicode_ci]
    environment:
     MYSQL_ROOT_PASSWORD: vcredit_o2o
-    --character-set-server: utf8mb4
    ports:
    - 3307:3306
    container_name: o2o-mysql-master
@@ -22,9 +22,9 @@ services:
    volumes:
    - /home/o2odev/dockerData/o2o-mysql-slave/data:/var/lib/mysql
    - /etc/localtime:/etc/localtime
+   command: [--character-set-server=utf8mb4,--collation-server=utf8mb4_unicode_ci]
    environment:
     MYSQL_ROOT_PASSWORD: vcredit_o2o
-    --character-set-server: utf8mb4
    ports:
    - 3308:3306
    container_name: o2o-mysql-slave
